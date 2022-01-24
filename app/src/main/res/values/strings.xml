@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Test2</string>
+    <string name="user_name">First Name</string>
+    <string name="user_score">Last Name</string>
+</resources>
