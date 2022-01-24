@@ -26,6 +26,7 @@ public class view_activity extends AppCompatActivity {
 
         //new Thread(this::loadUserList).start();
         loadUserListAsync();
+        //iwie wird das halt nie geupdated
     }
 
     private void initRecyclerView() {
@@ -54,6 +55,7 @@ public class view_activity extends AppCompatActivity {
         }
     }
 
+    //doesnt work dont use
     private void loadUserList() {
 
         Datenbank db = Datenbank.getInstance(this.getApplicationContext());

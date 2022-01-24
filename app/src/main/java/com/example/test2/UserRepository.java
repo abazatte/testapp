@@ -44,9 +44,27 @@ public class UserRepository{
         }, Datenbank.databaseWriterExecutorService);
     }
 
+    /**
+     * @author Abdurrahman Azattemür
+     *
+     *
+     * */
+
     public void deleteUser(User user){
         CompletableFuture.supplyAsync(() -> {
             this.userDao.deleteUser(user);
+
+            return null;
+        }, Datenbank.databaseWriterExecutorService);
+    }
+
+    /**
+     * @author Maximilian Jaesch
+     * */
+
+    public void deleteUserByName(String firstName, String lastName){
+        CompletableFuture.supplyAsync(() -> {
+            this.userDao.deleteUserWithFirstAndLast(firstName, lastName);
 
             return null;
         }, Datenbank.databaseWriterExecutorService);

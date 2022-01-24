@@ -2,6 +2,7 @@ package com.example.test2;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         holder.tvFirstName.setText(this.userList.get(position).firstName);
         holder.tvLastName.setText(this.userList.get(position).lastName);
         holder.deleteButton.setOnClickListener(view -> {
-            repository.deleteUser(new User(holder.tvFirstName.getText().toString(),holder.tvLastName.getText().toString()));
+            repository.deleteUserByName(this.userList.get(position).firstName,this.userList.get(position).lastName);
+            Log.d("lmao","slkafjiewjfioaefjioyjf");
+            notifyDataSetChanged();
         });
     }
 
