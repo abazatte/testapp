@@ -9,8 +9,22 @@ public class UserRepository{
 
     private UserDao userDao;
 
+    /**
+     * @author Abdurrahman Azattemür
+     *
+     * <p></p>
+     * <P>Quelle: Roosmann Vorlesung</P>
+     * */
+    //diesen Konstruktor nur beim ersten mal Aufrufen
     public UserRepository(Application application){
-        Datenbank datenbank = Datenbank.resetAndCreateNewInstance(application);
+        Datenbank datenbank = Datenbank.getInstance(application);
+        this.userDao = datenbank.userDao();
+    }
+
+    /**
+     * @author Maximilian Jaesch
+     * */
+    public UserRepository(Application application, Datenbank datenbank){
         this.userDao = datenbank.userDao();
     }
 

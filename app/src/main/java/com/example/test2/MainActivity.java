@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.concurrent.CompletableFuture;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void changeView(View v){
 
-        startActivity(new Intent(this, view_activity.class));
+        Intent intent = new Intent(this, view_activity.class);
+        //intent.putExtra("REPOSITORY",(new Gson()).toJson(repository));
+        startActivity(intent);
     }
 }
