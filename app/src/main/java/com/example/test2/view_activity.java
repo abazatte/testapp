@@ -1,18 +1,12 @@
 package com.example.test2;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
+import android.view.View;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -26,7 +20,7 @@ public class view_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
-        this.repository = new UserRepository(this.getApplication(),Datenbank.getInstance(this.getApplicationContext()));;
+        this.repository = new UserRepository(this.getApplication(),Datenbank.getInstance(this.getApplicationContext()));
 
         initRecyclerView();
 
@@ -41,7 +35,7 @@ public class view_activity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-        userListAdapter = new UserListAdapter(this);
+        userListAdapter = new UserListAdapter(this, repository);
         recyclerView.setAdapter(userListAdapter);
 
 

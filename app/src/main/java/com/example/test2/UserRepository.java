@@ -43,4 +43,12 @@ public class UserRepository{
             return listOfUser;
         }, Datenbank.databaseWriterExecutorService);
     }
+
+    public void deleteUser(User user){
+        CompletableFuture.supplyAsync(() -> {
+            this.userDao.deleteUser(user);
+
+            return null;
+        }, Datenbank.databaseWriterExecutorService);
+    }
 }
