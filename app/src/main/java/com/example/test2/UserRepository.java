@@ -23,6 +23,7 @@ public class UserRepository{
 
     /**
      * @author Maximilian Jaesch
+     * glaub die hier nehmen wir nicht
      * */
     public UserRepository(Application application, Datenbank datenbank){
         this.userDao = datenbank.userDao();
@@ -37,6 +38,7 @@ public class UserRepository{
         }, Datenbank.databaseWriterExecutorService);
     }
 
+    //hier muss MutableLiveData
     public CompletableFuture<List<User>> showUser (){
         return CompletableFuture.supplyAsync(() -> {
             List<User> listOfUser = this.userDao.getAllUser();

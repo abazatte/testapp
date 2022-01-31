@@ -16,13 +16,17 @@ import java.util.List;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyViewHolder> {
 
+    public interface OnDeleteClickListener {
+        void OnDeleteClickListener(String firstName, String lastName);
+    }
+
     private Context context;
     private List<User> userList;
+    private OnDeleteClickListener onDeleteClickListener;
 
-    private UserRepository repository;
-    public UserListAdapter(Context context, UserRepository userRepository){
+    public UserListAdapter(Context context, OnDeleteClickListener onDeleteClickListener){
         this.context = context;
-        repository =  userRepository;
+        this.onDeleteClickListener = onDeleteClickListener;
     }
 
     public void setUserList(List<User> userList1){
@@ -37,14 +41,15 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         return new MyViewHolder(view);
     }
 
+
+    //ich glaube hier den repository zu haben ist absolut harammm
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvFirstName.setText(this.userList.get(position).firstName);
         holder.tvLastName.setText(this.userList.get(position).lastName);
         holder.deleteButton.setOnClickListener(view -> {
-            repository.deleteUserByName(this.userList.get(position).firstName,this.userList.get(position).lastName);
+            onDeleteClickListener.OnDeleteClickListener(this.userList.get(position).firstName,this.userList.get(position).lastName);
             Log.d("lmao","slkafjiewjfioaefjioyjf");
-            notifyDataSetChanged();
         });
     }
 

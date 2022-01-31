@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         String lastName = this.editText_LastName.getText().toString();
 
         CompletableFuture<User> userCompletableFuture = MainActivity.this.repository.addUser(firstName,lastName);
+
+
         CompletableFuture<Void> voidCompletableFuture = userCompletableFuture.thenAccept((user -> {
             MainActivity.this.handler.post(() -> {
                 if (user == null) {

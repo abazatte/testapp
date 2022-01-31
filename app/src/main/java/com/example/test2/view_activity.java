@@ -1,6 +1,8 @@
 package com.example.test2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,15 +14,27 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class view_activity extends AppCompatActivity {
+public class view_activity extends AppCompatActivity implements UserListAdapter.OnDeleteClickListener {
 
     private UserListAdapter userListAdapter;
     private UserRepository repository;
+    private view_activityViewModel mview_activityViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
         this.repository = new UserRepository(this.getApplication(),Datenbank.getInstance(this.getApplicationContext()));
+
+        this.mview_activityViewModel = new ViewModelProvider(this).get(view_activityViewModel.class);
+
+        /*
+        this.mview_activityViewModel.getUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                userListAdapter.notifyDataSetChanged();
+            }
+        });*/
 
         initRecyclerView();
 
@@ -36,7 +50,7 @@ public class view_activity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-        userListAdapter = new UserListAdapter(this, repository);
+        userListAdapter = new UserListAdapter(this, this);
         recyclerView.setAdapter(userListAdapter);
 
 
@@ -64,4 +78,10 @@ public class view_activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void OnDeleteClickListener(String firstName, String lastName) {
+        repository.deleteUserByName(firstName,lastName);
+
+        loadUserListAsync();
+    }
 }
